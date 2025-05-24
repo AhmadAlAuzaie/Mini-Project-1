@@ -1,4 +1,3 @@
-
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -13,6 +12,28 @@ from sklearn.metrics import (
     confusion_matrix, classification_report
 )
 from math import sqrt
+from src.data_preparation import load_and_prepare_data
+from src.model_training import train_models
+import yaml
+
+file_path = "/mnt/data/mini_project_1_data.csv"
+
+if __name__ == "__main__":
+    x, y = load_and_prepare_data(file_path)
+    train_models(x, y)
+
+# Write all files
+with open("/mnt/data/src/data_preparation.py", "w") as f:
+    f.write(data_prep_py)
+
+with open("/mnt/data/src/model_training.py", "w") as f:
+    f.write(model_train_py)
+
+with open("/mnt/data/src/config.yaml", "w") as f:
+    f.write(config_yaml)
+
+with open("/mnt/data/main.py", "w") as f:
+    f.write(main_py)
 
 def evaluate_cls(name, y_true, y_pred):
     print(f"{name} Classification Report:\n", classification_report(y_true, y_pred))
@@ -36,6 +57,7 @@ df['data_channel'] = df['data_channel'].fillna('Unknown').str.strip().str.lower(
 
 x = df.drop(columns=['shares', 'ID', 'URL'])
 y = df['high_share']
+x = x.copy()
 x = x.dropna()
 y = y.loc[x.index]
 
