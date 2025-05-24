@@ -1,0 +1,16 @@
+file_path: "mini_project_1_data.csv"
+test_size: 0.2
+random_state: 42
+
+logistic_params:
+  C: [0.1, 1, 10]
+  solver: ["lbfgs"]
+  fit_intercept: [True, False]
+
+ridge_params:
+  alpha: [0.1, 1, 10]
+  fit_intercept: [True, False]
+
+lasso_params:
+  alpha: [0.1, 1, 10]
+  fit_intercept: [True, False]
